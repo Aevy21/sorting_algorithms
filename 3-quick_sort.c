@@ -11,10 +11,6 @@ int partition(int *array, int low, int high, size_t size);
  */
 void quick_sort(int *array, size_t size)
 {
-	if (array == NULL || size < 2)
-	{
-		return;
-	}
 	sort_recursion(array, 0, size - 1, size);
 }
 
@@ -52,7 +48,6 @@ int partition(int *array, int low, int high, size_t size)
 	int pivot = array[high];
 	int i = (low - 1);
 	int j;
-
 
 	for (j = low; j <= high - 1; j++)
 	{
