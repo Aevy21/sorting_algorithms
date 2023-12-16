@@ -57,7 +57,7 @@ void insertion_sort_list(listint_t **list)
 			print_list(*list);
 		}
 
-		current = current->next_node; /* Move to the next element in the list */
+		current = next_node; /* Move to the next element in the list */
 	}
 }
 
