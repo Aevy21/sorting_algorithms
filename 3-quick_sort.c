@@ -1,6 +1,6 @@
 #include "sort.h"
 
-void swap(int *a, int *b);
+void swap(int *a, int *b, int *array, size_t size);
 void sort_recursion(int *array, int low, int high, size_t size);
 int partition(int *array, int low, int high, size_t size);
 /**
@@ -11,6 +11,9 @@ int partition(int *array, int low, int high, size_t size);
  */
 void quick_sort(int *array, size_t size)
 {
+	if (size < 2)
+		return;
+
 	sort_recursion(array, 0, size - 1, size);
 }
 
@@ -25,6 +28,9 @@ void quick_sort(int *array, size_t size)
 void sort_recursion(int *array, int low, int high, size_t size)
 {
 	int mid;
+
+	if (low >= high)
+		return;
 
 	if (low < high)
 	{
@@ -51,25 +57,31 @@ int partition(int *array, int low, int high, size_t size)
 
 	for (j = low; j <= high - 1; j++)
 	{
-		if (array[j] <= pivot)
+		if (array[j] < pivot)
 		{
 			i++;
-			swap(&array[i], &array[j]);
+			swap(&array[i], &array[j], array, size);
 		}
 	}
-	swap(&array[i + 1], &array[high]);
-	print_array(array, size);
+	swap(&array[i + 1], &array[high], array, size);
+
 	return (i + 1);
 }
 /**
  * swap - swaps elements an an array
  * @b: an integer
  * @a: an integer
+ * @array: pointer to an array
+ * @size: size of the array
  * Return: Nothing
  */
-void swap(int *a, int *b)
+void swap(int *a, int *b, int *array, size_t size)
 {
 	int temp = *a;
 	*a = *b;
 	*b = temp;
+	if (*a != *b)
+	{
+		print_array(array, size);
+	}
 }

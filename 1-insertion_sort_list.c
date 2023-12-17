@@ -9,52 +9,38 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-    listint_t *current, *back, *temp, *next_node;
+	listint_t *current, *back, *temp;
 
-    if (list == NULL || *list == NULL || (*list)->next == NULL)
-        return;
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
+		return;
 
-    current = (*list)->next;
+	for (current = (*list)->next; current != NULL; current = current->next)
+	{
+		back = current->prev;
 
-    while (current)
-    {
-        int swap_count = 0; /* Initialize swap count for each outer loop iteration */
-        back = current->prev;
-        next_node = current->next;
+		while (back && back->n > current->n)
+		{
+			temp = back->prev;
 
-        while (back && back->n > current->n)
-        {
-            back->next = next_node;
+			back->next = current->next;
+			if (current->next != NULL)
+				current->next->prev = back;
 
-            if (next_node != NULL)
-                next_node->prev = back;
+			current->next = back;
+			current->prev = temp;
 
-            current->next = back;
-            current->prev = back->prev;
+			if (temp != NULL)
+				temp->next = current;
+			else
+				*list = current; /* Update the head if needed */
 
-            if (back->prev != NULL)
-                back->prev->next = current;
-            else
-                *list = current; /* Update the head if needed */
+			back->prev = current;
 
-            back->prev = current;
+			/* Print the list after swap */
+			print_list(*list);
 
-            /* Correct the next_node pointer */
-            temp = back;
-            back = current->prev;
-            next_node = temp;
-
-            /* Traverse result list and compare every node with our current node. */
-            swap_count++;
-        }
-
-        /* If any swaps, print the list after the inner loop */
-        if (swap_count > 0)
-        {
-            print_list(*list);
-        }
-
-        current = next_node; /* Move to the next element in the list */
-    }
+			/* Traverse result list and compare every node with our current node. */
+			back = temp;
+		}
+	}
 }
-
