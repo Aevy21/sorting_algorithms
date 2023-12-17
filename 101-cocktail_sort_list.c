@@ -17,7 +17,7 @@ void cocktail_sort_list(listint_t **list);
  */
 void cocktail_sort_list(listint_t **list)
 {
-	int swapped;
+	int swapped = 0;
 	listint_t *start = *list;
 	listint_t *end = NULL;
 	listint_t *current;
