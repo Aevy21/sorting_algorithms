@@ -6,31 +6,28 @@ void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2);
 void cocktail_sort_list(listint_t **list);
 /**
  * cocktail_sort_list - Sorts a doubly linked list of integers
- *                     in ascending order using the Cocktail Shaker Sort algorithm.
+ * in ascending order using the Cocktail Shaker Sort algorithm.
  *
  * @list: A pointer to a pointer to the head of the doubly linked list.
  *
  * Description:
  * This function sorts a doubly linked list in ascending order using the
  * Cocktail Shaker Sort algorithm. It swaps nodes and prints the list after
- * each swap. The process continues until the list is sorted.
+ * each swap. The process continues until the list is soted
  */
 void cocktail_sort_list(listint_t **list)
 {
-
 	int swapped;
 	listint_t *start = *list;
 	listint_t *end = NULL;
 	listint_t *current;
 
-	/* Check if the list is empty or only has one node */
 	if (list == NULL || *list == NULL)
 	{
 		return;
 	}
 
-	/* Perform the Cocktail Shaker Sort */
-	do 
+	while (1)
 	{
 		swapped = 0;
 
@@ -52,10 +49,10 @@ void cocktail_sort_list(listint_t **list)
 		}
 
 		/* Update the end node for the next pass */
-		end = start;
+		end = current;
 
 		/* Right to left pass */
-		 for (current = end; current != NULL && current->prev != NULL; current = current->prev)
+		for (current = end; current != NULL && current->prev != NULL; current = current->prev)
 		{
 			if (current->n < current->prev->n)
 			{
@@ -66,11 +63,10 @@ void cocktail_sort_list(listint_t **list)
 		}
 
 		/* Update the start node for the next pass */
-		start = end->next;
-
+		start = (swapped) ? start : current->next;
 	}
-	while (swapped);
 }
+
 
 /**
  * swap_nodes - Swaps two nodes in a doubly linked list.
@@ -85,6 +81,12 @@ void cocktail_sort_list(listint_t **list)
  */
 void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2)
 {
+	/* Check for valid nodes before swapping */
+	if (node1 == NULL || node2 == NULL)
+	{
+		return;
+	}
+
 	/* Update the next pointer of the previous node of node1 */
 	if (node1->prev != NULL)
 	{
