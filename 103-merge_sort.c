@@ -63,9 +63,9 @@ void merge(int *array, size_t left_size, size_t right_size)
 
 	/* Display the sorted array after merging */
 	printf("\n[Done]: ");
-	for (; l < merged_size; ++l)
+	for (l = 0; l < merged_size; ++l)
 	{
-		printf("%d ", array[l]);
+		printf("%d ", merged_array[l]);
 	}
 	printf("\n");
 
