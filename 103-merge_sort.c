@@ -17,6 +17,7 @@ void merge(int *array, size_t left_size, size_t right_size)
 
 	size_t i = 0, j = left_size, k = 0;
 	size_t l = 0;
+	size_t m = 0;
 
 	/* Display merging steps */
 	printf("Merging...\n[left]: ");
@@ -56,16 +57,16 @@ void merge(int *array, size_t left_size, size_t right_size)
 	}
 
 	/* Copy the sorted merged array back to the original array */
-	for (; l < merged_size; ++l)
+	for (; m < merged_size; ++m)
 	{
-		array[l] = merged_array[l];
+		array[m] = merged_array[m];
 	}
 
 	/* Display the sorted array after merging */
 	printf("\n[Done]: ");
-	for (l = 0; l < merged_size; ++l)
+	for (m = 0; m < merged_size; ++m)
 	{
-		printf("%d ", merged_array[l]);
+		printf("%d ", merged_array[m]);
 	}
 	printf("\n");
 
